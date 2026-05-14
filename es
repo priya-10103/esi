@@ -5,18 +5,18 @@ AGAIN:ADD A, #25
 DJNZ R2, AGAIN  
 MOV R5,A 
 
-ex 1b Sample of Assembly language program: 
-ORG 0H  
-MOV R5, #25H  
-MOV R7,#34H  
-MOV A, #0  
-ADD A, R5  
-ADD A, R7  
-ADD A, #12H  
-HERE:SJMP HERE  
-END 
+ex 1b  wrire an ALP for Addition using simulator
+
+CLR C                    ; CY = 0 
+MOV A, #45H        ; Low byte 1 
+ADD A, #0ECH      ; Add low byte 2 
+MOV R0, A          ; Store low byte result 
+MOV A, #02H        ; High byte 1 
+ADDC A, #0FCH    ; Add high byte 2 WITH carry 
+MOV R1, A          ; Store high byte result 
 
 ex 2a Program to add first 10 natural number: 
+
 MOV A,#0  
 MOV R2, #10  
 MOV R0, #0  
@@ -26,6 +26,7 @@ DJNZ R2, AGAIN
 MOV 46H, A 
 
 ex 2b write an ALP for subtraction in simulator 
+
  Subtraction with CY=0: 
 ORG 00H 
 MOV A, #50H      ; Load first number (minuend) 
@@ -56,17 +57,37 @@ INC R1
 DJNZ R3,BACK 
 HERE: SJMP HERE 
 END
+                   (or)
 
-ex 3b Sample of Assembly language program: 
-ORG 0H  
-MOV R5, #25H  
-MOV R7,#34H  
-MOV A, #0  
-ADD A, R5  
-ADD A, R7  
-ADD A, #12H  
-HERE:SJMP HERE  
+
+ex 3a TO TEST DATA TRANSFER BETWEEN REGISTER AND 
+MEMORY USING EDSIM 51 SIMULATOR 
+
+MOV R0,#50H 
+MOV R1,#10H 
+MOV B,#0 
+BACK: MOV A,@R0 
+             CJNE A,B,LOOP 
+LOOP: JC LOOP1 
+             MOV B,A 
+             INC R0 
+             DJNZ R1,BACK 
+             SJMP NEXT 
+LOOP1: INC R0 
+               DJNZ R1,BACK 
+NEXT: MOV A,B 
+             MOV 60H,A 
 END 
+
+ex 3b  wrire an ALP for Addition using simulator
+
+CLR C                    ; CY = 0 
+MOV A, #45H        ; Low byte 1 
+ADD A, #0ECH      ; Add low byte 2 
+MOV R0, A          ; Store low byte result 
+MOV A, #02H        ; High byte 1 
+ADDC A, #0FCH    ; Add high byte 2 WITH carry 
+MOV R1, A          ; Store high byte result  
 
 ex 4a  Program to load the accumulator with the value of 55H and complement the ACC 
 700 times: 
